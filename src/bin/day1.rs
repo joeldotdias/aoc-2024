@@ -6,8 +6,7 @@ fn main() {
 
     fs::read_to_string("input/day1")
         .unwrap()
-        .trim()
-        .split('\n')
+        .lines()
         .for_each(|line| {
             let mut parts = line.split_whitespace();
             let (n1, n2) = (parts.next().unwrap(), parts.next().unwrap());
