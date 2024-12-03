@@ -17,11 +17,9 @@ fn main() {
     left.sort();
     right.sort();
 
-    let part1 = part1(&left, &right);
-    println!("Part1: {part1}");
+    println!("Part1: {}", part1(&left, &right));
 
-    let part2 = part2(&left, &right);
-    println!("Part2: {part2}");
+    println!("Part2: {}", part2(&left, &right));
 }
 
 fn part1(left: &[u32], right: &[u32]) -> u32 {

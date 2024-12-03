@@ -34,31 +34,31 @@ fn main() {
     println!("Safe: {safe}");
 }
 
-fn is_ordered(slice: &[u32]) -> bool {
-    let ascending = slice.windows(2).all(|w| w[0] <= w[1]);
-    let descending = slice.windows(2).all(|w| w[0] >= w[1]);
+fn is_ordered(level: &[u32]) -> bool {
+    let ascending = level.windows(2).all(|w| w[0] <= w[1]);
+    let descending = level.windows(2).all(|w| w[0] >= w[1]);
     ascending || descending
 }
 
-fn diff_be_valid(slice: &[u32]) -> bool {
-    slice.windows(2).all(|w| {
+fn diff_be_valid(level: &[u32]) -> bool {
+    level.windows(2).all(|w| {
         let diff = if w[0] <= w[1] {
             w[1] - w[0]
         } else {
             w[0] - w[1]
         };
-        diff >= 1 && diff <= 3
+        (1..=3).contains(&diff)
     })
 }
 
-fn is_safe_with_dampener(slice: &[u32]) -> bool {
+fn is_safe_with_dampener(level: &[u32]) -> bool {
     // already valid
-    if is_ordered(slice) && diff_be_valid(slice) {
+    if is_ordered(level) && diff_be_valid(level) {
         return true;
     }
 
-    for i in 0..slice.len() {
-        let mut dampened = slice.to_vec();
+    for i in 0..level.len() {
+        let mut dampened = level.to_vec();
         dampened.remove(i);
 
         if is_ordered(&dampened) && diff_be_valid(&dampened) {
